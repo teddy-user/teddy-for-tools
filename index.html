@@ -6,44 +6,70 @@
 <title>Password Variant Tool PRO v5.0</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<script>tailwind.config={theme:{extend:{colors:{dark:{900:"#0f172a",800:"#1e293b",700:"#334155",600:"#475569"}}}}}</script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        dark: { 900: '#0f172a', 800: '#1e293b', 700: '#334155', 600: '#475569' }
+      }
+    }
+  }
+}
+</script>
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
-body{font-family:Inter,system-ui,sans-serif}
-.mono{font-family:"JetBrains Mono",monospace}
-.scrollbar-thin::-webkit-scrollbar{width:6px}
-.scrollbar-thin::-webkit-scrollbar-track{background:#1e293b}
-.scrollbar-thin::-webkit-scrollbar-thumb{background:#475569;border-radius:3px}
-.tab-active{border-bottom:2px solid #6366f1;color:#818cf8}
-.group-card{transition:all .15s}
-.group-card:hover{background:#334155}
-.group-card.selected{background:#312e81;border-color:#6366f1}
-.btn-primary{background:linear-gradient(135deg,#6366f1,#4f46e5)}
-.btn-primary:hover{background:linear-gradient(135deg,#818cf8,#6366f1)}
-.btn-primary:disabled{opacity:.5;cursor:not-allowed}
-.glow{box-shadow:0 0 20px rgba(99,102,241,.15)}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+body { font-family: 'Inter', system-ui, sans-serif; }
+.mono { font-family: 'JetBrains Mono', monospace; }
+.scrollbar-thin::-webkit-scrollbar { width: 6px; }
+.scrollbar-thin::-webkit-scrollbar-track { background: #1e293b; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+.tab-active { border-bottom: 2px solid #6366f1; color: #818cf8; }
+.group-card { transition: all 0.15s; cursor: pointer; }
+.group-card:hover { background: #334155; }
+.group-card.selected { background: #312e81; border-color: #6366f1; }
+.btn-primary { background: linear-gradient(135deg, #6366f1, #4f46e5); }
+.btn-primary:hover { background: linear-gradient(135deg, #818cf8, #6366f1); }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+.glow { box-shadow: 0 0 20px rgba(99, 102, 241, 0.15); }
 </style>
 </head>
 <body class="bg-dark-900 text-slate-200 min-h-screen">
+
 <header class="border-b border-dark-700 bg-dark-800/80 backdrop-blur sticky top-0 z-50">
   <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
     <div class="flex items-center gap-3">
-      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg"><i class="fas fa-key text-white"></i></div>
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg">
+        <i class="fas fa-key text-white"></i>
+      </div>
       <div>
         <h1 class="text-xl font-bold text-white">Password Variant Tool <span class="text-indigo-400">PRO</span></h1>
         <p class="text-xs text-slate-400">v5.0 · Mutate · Clone User · Custom</p>
       </div>
     </div>
-    <div class="flex gap-2 text-xs"><span class="px-2 py-1 rounded bg-dark-700 mono">160+ rules</span><span class="px-2 py-1 rounded bg-dark-700 mono">25 groups</span></div>
+    <div class="flex gap-2 text-xs">
+      <span class="px-2 py-1 rounded bg-dark-700 mono">160+ rules</span>
+      <span class="px-2 py-1 rounded bg-dark-700 mono">25 groups</span>
+    </div>
   </div>
 </header>
+
 <main class="max-w-7xl mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
   <div class="lg:col-span-4 space-y-5">
+    <!-- Tabs -->
     <div class="bg-dark-800 rounded-2xl border border-dark-700 p-1 flex glow">
-      <button onclick="setMode('mutate')" id="tab-mutate" class="tab-btn flex-1 py-2.5 rounded-xl text-sm font-medium tab-active"><i class="fas fa-random mr-1"></i> Mutate</button>
-      <button onclick="setMode('clone')" id="tab-clone" class="tab-btn flex-1 py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:text-slate-200"><i class="fas fa-clone mr-1"></i> Clone</button>
-      <button onclick="setMode('custom')" id="tab-custom" class="tab-btn flex-1 py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:text-slate-200"><i class="fas fa-sliders-h mr-1"></i> Custom</button>
+      <button onclick="setMode('mutate')" id="tab-mutate" class="tab-btn flex-1 py-2.5 rounded-xl text-sm font-medium tab-active">
+        <i class="fas fa-random mr-1"></i> Mutate
+      </button>
+      <button onclick="setMode('clone')" id="tab-clone" class="tab-btn flex-1 py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:text-slate-200">
+        <i class="fas fa-clone mr-1"></i> Clone
+      </button>
+      <button onclick="setMode('custom')" id="tab-custom" class="tab-btn flex-1 py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:text-slate-200">
+        <i class="fas fa-sliders-h mr-1"></i> Custom
+      </button>
     </div>
+
+    <!-- Mutate panel -->
     <div id="panel-mutate" class="space-y-4">
       <div class="bg-dark-800 rounded-2xl border border-dark-700 p-5">
         <h3 class="text-sm font-semibold text-slate-300 mb-3"><i class="fas fa-layer-group text-indigo-400 mr-2"></i>Rule Groups</h3>
@@ -56,145 +82,666 @@ body{font-family:Inter,system-ui,sans-serif}
       <div class="bg-dark-800 rounded-2xl border border-dark-700 p-5 space-y-3">
         <h3 class="text-sm font-semibold text-slate-300"><i class="fas fa-cog text-indigo-400 mr-2"></i>Options</h3>
         <div class="grid grid-cols-2 gap-3">
-          <div><label class="text-xs text-slate-400">Max Length</label><input type="number" id="max-len" value="24" class="w-full bg-dark-900 border border-dark-600 rounded-lg px-3 py-2 text-sm"></div>
-          <div><label class="text-xs text-slate-400">Max / Line</label><input type="number" id="max-per-line" value="60" class="w-full bg-dark-900 border border-dark-600 rounded-lg px-3 py-2 text-sm"></div>
-          <div><label class="text-xs text-slate-400">Max Total</label><input type="number" id="max-total" value="20000" class="w-full bg-dark-900 border border-dark-600 rounded-lg px-3 py-2 text-sm"></div>
-          <div><label class="text-xs text-slate-400">Depth</label><input type="number" id="depth" value="1" min="1" max="3" class="w-full bg-dark-900 border border-dark-600 rounded-lg px-3 py-2 text-sm"></div>
+          <div>
+            <label class="text-xs text-slate-400">Max Length</label>
+            <input type="number" id="max-len" value="24" class="w-full bg-dark-900 border border-dark-600 rounded-lg px-3 py-2 text-sm">
+          </div>
+          <div>
+            <label class="text-xs text-slate-400">Max / Line</label>
+            <input type="number" id="max-per-line" value="60" class="w-full bg-dark-900 border border-dark-600 rounded-lg px-3 py-2 text-sm">
+          </div>
+          <div>
+            <label class="text-xs text-slate-400">Max Total</label>
+            <input type="number" id="max-total" value="20000" class="w-full bg-dark-900 border border-dark-600 rounded-lg px-3 py-2 text-sm">
+          </div>
+          <div>
+            <label class="text-xs text-slate-400">Depth</label>
+            <input type="number" id="depth" value="1" min="1" max="3" class="w-full bg-dark-900 border border-dark-600 rounded-lg px-3 py-2 text-sm">
+          </div>
         </div>
-        <label class="flex items-center gap-2 text-sm"><input type="checkbox" id="use-advanced"> Advanced Chaining</label>
+        <label class="flex items-center gap-2 text-sm">
+          <input type="checkbox" id="use-advanced"> Advanced Chaining
+        </label>
       </div>
     </div>
+
+    <!-- Clone panel -->
     <div id="panel-clone" class="space-y-4 hidden">
       <div class="bg-dark-800 rounded-2xl border border-dark-700 p-5 space-y-4">
         <h3 class="text-sm font-semibold text-slate-300"><i class="fas fa-user-plus text-indigo-400 mr-2"></i>Clone Options</h3>
-        <div><label class="text-xs text-slate-400">Target Number</label><input type="number" id="clone-target" value="999" class="w-full bg-dark-900 border border-dark-600 rounded-lg px-3 py-2 text-sm"></div>
-        <div class="grid grid-cols-2 gap-3">
-          <div><label class="text-xs text-slate-400">Separator</label><input type="text" id="clone-sep" placeholder="_ hoặc -" class="w-full bg-dark-900 border border-dark-600 rounded-lg px-3 py-2 text-sm"></div>
-          <div><label class="text-xs text-slate-400">Pad (0=auto)</label><input type="number" id="clone-pad" value="0" class="w-full bg-dark-900 border border-dark-600 rounded-lg px-3 py-2 text-sm"></div>
+        <div>
+          <label class="text-xs text-slate-400">Target Number</label>
+          <input type="number" id="clone-target" value="999" class="w-full bg-dark-900 border border-dark-600 rounded-lg px-3 py-2 text-sm">
         </div>
-        <div><label class="text-xs text-slate-400">Max Results</label><input type="number" id="clone-max" value="50000" class="w-full bg-dark-900 border border-dark-600 rounded-lg px-3 py-2 text-sm"></div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="text-xs text-slate-400">Separator</label>
+            <input type="text" id="clone-sep" placeholder="_ hoặc -" class="w-full bg-dark-900 border border-dark-600 rounded-lg px-3 py-2 text-sm">
+          </div>
+          <div>
+            <label class="text-xs text-slate-400">Pad (0 = auto)</label>
+            <input type="number" id="clone-pad" value="0" class="w-full bg-dark-900 border border-dark-600 rounded-lg px-3 py-2 text-sm">
+          </div>
+        </div>
+        <div>
+          <label class="text-xs text-slate-400">Max Results</label>
+          <input type="number" id="clone-max" value="50000" class="w-full bg-dark-900 border border-dark-600 rounded-lg px-3 py-2 text-sm">
+        </div>
         <div class="bg-dark-900/60 rounded-lg p-3 text-xs text-slate-400">
-          <b class="text-indigo-300">Ví dụ:</b> <code class="text-emerald-400">qqzdb0027|@Dragon0duc0</code><br>
-          → <code class="text-emerald-400">qqzdb0028:@Dragon0duc0</code> ... (tự giữ số 0)
+          <b class="text-indigo-300">Ví dụ:</b><br>
+          Input: <code class="text-emerald-400">qqzdb0027|@Dragon0duc0</code><br>
+          Output: <code class="text-emerald-400">qqzdb0028:@Dragon0duc0</code> ...<br>
+          Tool tự động giữ số 0 (zero-padding).
         </div>
       </div>
     </div>
+
+    <!-- Custom panel -->
     <div id="panel-custom" class="space-y-4 hidden">
       <div class="bg-dark-800 rounded-2xl border border-dark-700 p-5 space-y-3">
-        <h3 class="text-sm font-semibold text-slate-300"><i class="fas fa-edit text-indigo-400 mr-2"></i>Custom</h3>
-        <div><label class="text-xs text-slate-400">Suffixes (1 per line)</label><textarea id="custom-suffixes" rows="3" class="w-full bg-dark-900 border border-dark-600 rounded-lg px-3 py-2 text-sm mono" placeholder="123&#10;@&#10;vip"></textarea></div>
-        <div><label class="text-xs text-slate-400">Prefixes</label><textarea id="custom-prefixes" rows="2" class="w-full bg-dark-900 border border-dark-600 rounded-lg px-3 py-2 text-sm mono"></textarea></div>
-        <div><label class="text-xs text-slate-400">Separators</label><textarea id="custom-seps" rows="2" class="w-full bg-dark-900 border border-dark-600 rounded-lg px-3 py-2 text-sm mono"></textarea></div>
+        <h3 class="text-sm font-semibold text-slate-300"><i class="fas fa-edit text-indigo-400 mr-2"></i>Custom Rules</h3>
+        <div>
+          <label class="text-xs text-slate-400">Suffixes (mỗi dòng 1 cái)</label>
+          <textarea id="custom-suffixes" rows="3" class="w-full bg-dark-900 border border-dark-600 rounded-lg px-3 py-2 text-sm mono" placeholder="123&#10;@&#10;vip&#10;2026"></textarea>
+        </div>
+        <div>
+          <label class="text-xs text-slate-400">Prefixes</label>
+          <textarea id="custom-prefixes" rows="2" class="w-full bg-dark-900 border border-dark-600 rounded-lg px-3 py-2 text-sm mono" placeholder="my&#10;super"></textarea>
+        </div>
+        <div>
+          <label class="text-xs text-slate-400">Separators (chèn giữa)</label>
+          <textarea id="custom-seps" rows="2" class="w-full bg-dark-900 border border-dark-600 rounded-lg px-3 py-2 text-sm mono" placeholder="@&#10;_&#10;!"></textarea>
+        </div>
       </div>
     </div>
-    <button id="btn-generate" onclick="runTool()" class="w-full btn-primary text-white font-semibold py-3.5 rounded-xl flex items-center justify-center gap-2"><i class="fas fa-bolt"></i> Generate Variants</button>
+
+    <button id="btn-generate" onclick="runTool()" class="w-full btn-primary text-white font-semibold py-3.5 rounded-xl flex items-center justify-center gap-2">
+      <i class="fas fa-bolt"></i> Generate Variants
+    </button>
+
     <div id="stats" class="hidden bg-dark-800 rounded-2xl border border-dark-700 p-4">
       <div class="grid grid-cols-3 gap-3 text-center text-sm">
-        <div><div class="text-2xl font-bold text-indigo-400" id="stat-input">0</div><div class="text-xs text-slate-500">Input</div></div>
-        <div><div class="text-2xl font-bold text-emerald-400" id="stat-output">0</div><div class="text-xs text-slate-500">Output</div></div>
-        <div><div class="text-2xl font-bold text-amber-400" id="stat-time">0s</div><div class="text-xs text-slate-500">Time</div></div>
+        <div>
+          <div class="text-2xl font-bold text-indigo-400" id="stat-input">0</div>
+          <div class="text-xs text-slate-500">Input</div>
+        </div>
+        <div>
+          <div class="text-2xl font-bold text-emerald-400" id="stat-output">0</div>
+          <div class="text-xs text-slate-500">Output</div>
+        </div>
+        <div>
+          <div class="text-2xl font-bold text-amber-400" id="stat-time">0s</div>
+          <div class="text-xs text-slate-500">Time</div>
+        </div>
       </div>
     </div>
   </div>
+
+  <!-- RIGHT -->
   <div class="lg:col-span-8 space-y-5">
     <div class="bg-dark-800 rounded-2xl border border-dark-700 overflow-hidden glow">
       <div class="flex items-center justify-between px-5 py-3 border-b border-dark-700">
         <h3 class="text-sm font-semibold"><i class="fas fa-file-import text-indigo-400 mr-2"></i>Input Combo</h3>
         <div class="flex gap-2">
-          <label class="text-xs px-3 py-1.5 rounded-lg bg-dark-700 hover:bg-dark-600 cursor-pointer"><i class="fas fa-upload mr-1"></i>Upload<input type="file" accept=".txt" class="hidden" onchange="loadFile(event)"></label>
+          <label class="text-xs px-3 py-1.5 rounded-lg bg-dark-700 hover:bg-dark-600 cursor-pointer">
+            <i class="fas fa-upload mr-1"></i>Upload
+            <input type="file" accept=".txt" class="hidden" onchange="loadFile(event)">
+          </label>
           <button onclick="document.getElementById('input-area').value=''" class="text-xs px-3 py-1.5 rounded-lg bg-dark-700 hover:bg-dark-600">Clear</button>
         </div>
       </div>
-      <textarea id="input-area" rows="8" class="w-full bg-dark-900/50 px-5 py-4 text-sm mono focus:outline-none scrollbar-thin" placeholder="user:pass hoặc user|pass&#10;&#10;qqzdb0027|@Dragon0duc0&#10;admin:admin123"></textarea>
+      <textarea id="input-area" rows="8" class="w-full bg-dark-900/50 px-5 py-4 text-sm mono focus:outline-none scrollbar-thin" placeholder="user:pass hoặc user|pass (mỗi dòng 1 combo)&#10;&#10;qqzdb0027|@Dragon0duc0&#10;admin:admin123&#10;user99:pass"></textarea>
     </div>
+
     <div class="bg-dark-800 rounded-2xl border border-dark-700 overflow-hidden">
       <div class="flex items-center justify-between px-5 py-3 border-b border-dark-700">
-        <h3 class="text-sm font-semibold"><i class="fas fa-file-export text-emerald-400 mr-2"></i>Output</h3>
+        <h3 class="text-sm font-semibold"><i class="fas fa-file-export text-emerald-400 mr-2"></i>Output Result</h3>
         <div class="flex gap-2">
           <button onclick="copyOutput()" class="text-xs px-3 py-1.5 rounded-lg bg-dark-700 hover:bg-dark-600"><i class="fas fa-copy mr-1"></i>Copy</button>
           <button onclick="downloadOutput()" class="text-xs px-3 py-1.5 rounded-lg bg-emerald-600/20 text-emerald-400 border border-emerald-600/30"><i class="fas fa-download mr-1"></i>Download</button>
         </div>
       </div>
-      <textarea id="output-area" rows="14" readonly class="w-full bg-dark-900/50 px-5 py-4 text-sm mono text-emerald-300/90 focus:outline-none scrollbar-thin" placeholder="Kết quả hiện ở đây..."></textarea>
+      <textarea id="output-area" rows="14" readonly class="w-full bg-dark-900/50 px-5 py-4 text-sm mono text-emerald-300/90 focus:outline-none scrollbar-thin" placeholder="Kết quả sẽ hiện ở đây..."></textarea>
     </div>
   </div>
 </main>
-<footer class="text-center text-xs text-slate-600 py-6">Password Variant Tool PRO v5.0 · Fixed Clone · Web UI</footer>
+
+<footer class="text-center text-xs text-slate-600 py-6">Password Variant Tool PRO v5.0 · Fixed Clone Engine · Web UI</footer>
 
 <script>
-const ALL_RULES={},RULE_GROUPS={case:["1a","1b","1c","1d","1e","1f"],numbers:["2a","2b","2c","2d","2e","2f","2g","2h","2i","2j","2k","2l","2m","2n"],years:["3a","3b","3c","3d","3e","3f","3g","3h","3i","3j","3k","3l","3m","3n"],special:["4a","4b","4c","4d","4e","4f","4g","4h","4i","4j","4k","4l","4m","4n"],vn_suffix:["5a","5b","5c","5d","5e","5f","5g","5h","5i","5j","5k","5l","5m","5n","5o"],leet:["6a","6b","6c","6d","6e","6f","6g","6h","6i","6j"],separator:["7a","7b","7c","7d","7e","7f","7g","7h"],reverse:["8a","8b","8c","8d","8e","8f","8g"],double:["9a","9b","9c","9d","9e","9f","9g"],username:["10a","10b","10c","10d","10e","10f","10g","10h","10i","10j"],join:["11a","11b","11c","11d","11e","11f"],phone:["12a","12b","12c","12d","12e","12f"],common:["13a","13b","13c","13d","13e","13f","13g","13h","13i"],language:["14a","14b","14c","14d","14e","14f","14g"],num2letter:["15a","15b","15c","15d","15e","15f"],prefix:["16a","16b","16c","16d","16e","16f"],insert_mid:["17a","17b","17c","17d","17e","17f"],dates:["18a","18b","18c","18d","18e","18f"],basic_num:["19a","19b","19c","19d","19e"],advanced:["20a","20b","20c","20d","20e","20f"],game_vn:["21a","21b","21c","21d","21e","21f","21g","21h","21i","21j"],keyboard:["22a","22b","22c","22d","22e","22f"],remove:["23a","23b","23c","23d","23e","23f"],insert_str:["24a","24b","24c","24d","24e","24f"],extra:["25a","25b","25c","25d","25e","25f"]};
-const GROUP_NAMES={case:"Case & Capitalize",numbers:"Numbers",years:"Years",special:"Special Chars",vn_suffix:"VN Suffixes",leet:"Leet Speak",separator:"Separators",reverse:"Reverse & Transform",double:"Double & Repeat",username:"From Username",join:"Join & Transform",phone:"Phone",common:"Common Words",language:"Language",num2letter:"Num to Letter",prefix:"Security Prefix",insert_mid:"Insert Mid",dates:"Dates",basic_num:"Basic Numbers",advanced:"Advanced Combos",game_vn:"Game VN",keyboard:"Keyboard",remove:"Remove Chars",insert_str:"Insert Strings",extra:"Extra Strong"};
-ALL_RULES["1a"]=p=>[p.toLowerCase()];ALL_RULES["1b"]=p=>[p.toUpperCase()];
-ALL_RULES["1c"]=p=>{for(let i=0;i<p.length;i++)if(/[a-zA-Z]/.test(p[i]))return[p.slice(0,i)+p[i].toUpperCase()+p.slice(i+1).toLowerCase()];return[];};
-ALL_RULES["1d"]=p=>{for(let i=p.length-1;i>=0;i--)if(/[a-zA-Z]/.test(p[i]))return[p.slice(0,i)+p[i].toUpperCase()+p.slice(i+1)];return[];};
-ALL_RULES["1e"]=p=>[[...p].map((c,i)=>i%2===0?c.toUpperCase():c.toLowerCase()).join("")];
-ALL_RULES["1f"]=p=>[p.replace(/\w\S*/g,t=>t[0].toUpperCase()+t.slice(1).toLowerCase())];
-["123","1234","12345","123456","1234567","12345678","123456789","111","999","666","000","777","88","69"].forEach((s,i)=>{ALL_RULES["2"+"abcdefghijklmn"[i]]=p=>[p+s]});
-["1990","2000","2010","2020","2024","2025","2026","90","95","99","2023","2015","2005"].forEach((s,i)=>{ALL_RULES["3"+"abcdefghijklm"[i]]=p=>[p+s]});
-ALL_RULES["3n"]=p=>["1985","1988","1992","1995","1998","2001","2003","2008","2012","2018"].map(y=>p+y);
-["@","@@","!","!!","#","$",".","*","&","^","~","%","?","!!@"].forEach((s,i)=>{ALL_RULES["4"+"abcdefghijklmn"[i]]=p=>[p+s]});
-["vip","pro","cute","love","baby","hihi","kaka","ok","123ok","abc","xyz","qwerty","depzai","xinh","yeu"].forEach((s,i)=>{ALL_RULES["5"+"abcdefghijklmno"[i]]=p=>[p+s]});
-ALL_RULES["6a"]=p=>[p.replace(/[aA]/g,"@")];ALL_RULES["6b"]=p=>[p.replace(/[oO]/g,"0")];ALL_RULES["6c"]=p=>[p.replace(/[iI]/g,"1")];ALL_RULES["6d"]=p=>[p.replace(/[eE]/g,"3")];ALL_RULES["6e"]=p=>[p.replace(/[sS]/g,"$")];ALL_RULES["6f"]=p=>[p.replace(/[tT]/g,"7")];ALL_RULES["6g"]=p=>[p.replace(/[gG]/g,"9")];ALL_RULES["6h"]=p=>[p.replace(/[bB]/g,"8")];ALL_RULES["6j"]=p=>[p.replace(/[lL]/g,"1")];
-ALL_RULES["6i"]=p=>{let r=p;[["aA","@"],["oO","0"],["eE","3"],["iI","1"],["sS","$"],["tT","7"],["gG","9"],["bB","8"],["lL","1"]].forEach(([c,rep])=>r=r.replace(new RegExp("["+c+"]","g"),rep));return r!==p?[r]:[]};
-function _sep(p,s){const m=p.match(/^([A-Za-z]+)(\d+)$/)||p.match(/^(\d+)([A-Za-z]+)$/);if(m){const L=/[A-Za-z]/.test(m[1])?m[1]:m[2],D=/\d/.test(m[1])?m[1]:m[2];return[L+s+D]}return[]}
-["_","-",".","#","@","|",":","~"].forEach((s,i)=>{ALL_RULES["7"+"abcdefgh"[i]]=p=>_sep(p,s)});
-ALL_RULES["8a"]=p=>[p.split("").reverse().join("")];
-ALL_RULES["8b"]=p=>{const L=(p.match(/[A-Za-z]/g)||[]),N=(p.match(/[^A-Za-z]/g)||[];return L.length?[L.reverse().join("")+N.join("")]:[]};
-ALL_RULES["8c"]=p=>{const n=p.match(/\d+/);return n?[p.replace(n[0],n[0].split("").reverse().join(""))]:[]};
-ALL_RULES["8d"]=p=>[[...p].map(c=>c===c.toUpperCase()?c.toLowerCase():c.toUpperCase()).join("")];
-ALL_RULES["8e"]=p=>p.length>1?[p.slice(-1)+p.slice(0,-1)]:[];ALL_RULES["8f"]=p=>p.length>1?[p.slice(1)+p[0]]:[];
-ALL_RULES["8g"]=p=>{const r=p.split("").reverse().join("");return r?[r[0].toUpperCase()+r.slice(1).toLowerCase()]:[]};
-ALL_RULES["9a"]=p=>p.length*2<=64?[p+p]:[];ALL_RULES["9b"]=p=>p.length*3<=64?[p+p+p]:[];
-ALL_RULES["9c"]=p=>{const l=(p.match(/[A-Za-z]/g)||[];return l.length&&p.length+3<=64?[p+l[0].repeat(3)]:[]};
-ALL_RULES["9d"]=p=>p&&p.length+1<=64?[p+p.slice(-1)]:[];ALL_RULES["9e"]=p=>p&&p.length+1<=64?[p[0]+p]:[];
-ALL_RULES["9f"]=p=>p.length>=3&&p.length+3<=64?[p+p.slice(0,3)]:[];ALL_RULES["9g"]=p=>p.length>=2&&p.length+2<=64?[p+p.slice(-2)]:[];
-ALL_RULES["10a"]=(p,u)=>u?[u+"123"]:[];ALL_RULES["10b"]=(p,u)=>u?[u+"@"]:[];ALL_RULES["10c"]=(p,u)=>u?[u+"1999"]:[];
-ALL_RULES["10d"]=(p,u)=>u?[u+"@123"]:[];ALL_RULES["10e"]=(p,u)=>u&&p?[u+p]:[];ALL_RULES["10f"]=(p,u)=>u?[u[0].toUpperCase()+u.slice(1)]:[];
-ALL_RULES["10g"]=(p,u)=>u&&p?[u+p+"123"]:[];ALL_RULES["10h"]=(p,u)=>u&&p?[p+u]:[];ALL_RULES["10i"]=(p,u)=>u&&p?[u+"_"+p]:[];ALL_RULES["10j"]=(p,u)=>u&&p?[u+"."+p]:[];
-ALL_RULES["11a"]=p=>{const m=p.match(/(\d+)$/);return m?[p+m[1][0]]:[]};ALL_RULES["11b"]=p=>{const m=p.match(/^(\d+)/);return m?[m[1][0]+p]:[]};
-ALL_RULES["11c"]=p=>p?[p[0].toUpperCase()+p.slice(1).toLowerCase()]:[];ALL_RULES["11d"]=p=>[p.toLowerCase().replace(/[^a-z0-9]+/g,"_")];
-ALL_RULES["11e"]=p=>[p.toLowerCase().replace(/[^a-z0-9]+/g,"-")];ALL_RULES["11f"]=p=>[p.replace(/[^A-Za-z0-9]/g,"")];
-const _isPhone=s=>/^0\d{9,10}$/.test(s)||/^84\d{9,10}$/.test(s);
-ALL_RULES["12a"]=p=>_isPhone(p)?[p+"@"]:[];ALL_RULES["12b"]=p=>_isPhone(p)?[p+"123"]:[];ALL_RULES["12c"]=p=>_isPhone(p)?[p+"vip"]:[];
-ALL_RULES["12d"]=p=>_isPhone(p)&&p.startsWith("0")?[p.slice(1)]:[];ALL_RULES["12e"]=p=>_isPhone(p)&&p.startsWith("0")?["+84"+p.slice(1)]:[];ALL_RULES["12f"]=p=>_isPhone(p)?[p+"ok"]:[];
-["pass","pwd","admin","root","test","user","login","123pass","matkhau"].forEach((s,i)=>{ALL_RULES["13"+"abcdefghi"[i]]=p=>[p+s]});
-ALL_RULES["14a"]=p=>[p+"vn"];ALL_RULES["14b"]=p=>[p+"123vn"];ALL_RULES["14c"]=p=>[p+"sg"];ALL_RULES["14d"]=p=>["vn_"+p];ALL_RULES["14e"]=p=>[p+"asia"];ALL_RULES["14f"]=p=>[p+"vn2026"];ALL_RULES["14g"]=p=>["sg_"+p];
-ALL_RULES["15a"]=p=>[p.replace(/0/g,"o")];ALL_RULES["15b"]=p=>[p.replace(/1/g,"i")];ALL_RULES["15c"]=p=>[p.replace(/5/g,"s")];
-ALL_RULES["15d"]=p=>[p.replace(/0/g,"o").replace(/1/g,"i").replace(/5/g,"s").replace(/8/g,"B")];ALL_RULES["15e"]=p=>[p.replace(/8/g,"B")];ALL_RULES["15f"]=p=>[p.replace(/3/g,"E")];
-["secure","secret","private","hidden","my","super"].forEach((s,i)=>{ALL_RULES["16"+"abcdef"[i]]=p=>[s+p]});
-const _mid=(p,s)=>p.length>1?[p.slice(0,Math.floor(p.length/2))+s+p.slice(Math.floor(p.length/2))]:[];
-["@","#","!","$", "_","."].forEach((s,i)=>{ALL_RULES["17"+"abcdef"[i]]=p=>_mid(p,s)});
-ALL_RULES["18a"]=p=>[p+"010101"];ALL_RULES["18b"]=p=>[p+"120101"];ALL_RULES["18c"]=p=>[p+"150101"];ALL_RULES["18d"]=p=>[p+"311201"];ALL_RULES["18e"]=p=>[p+"01012000"];
-ALL_RULES["18f"]=p=>["01012000","15052000","20092000","31122000","01011995","01012005"].map(d=>p+d);
-ALL_RULES["19a"]=p=>[p+"12345"];ALL_RULES["19b"]=p=>["1"+p];ALL_RULES["19c"]=p=>[p+"99"];ALL_RULES["19d"]=p=>[p+"99999"];ALL_RULES["19e"]=p=>[p+"123321"];
-ALL_RULES["20a"]=(p,u)=>u&&p?[u+p+"2026"]:[];ALL_RULES["20b"]=p=>[p+"123vip"];ALL_RULES["20c"]=p=>[p.toLowerCase()+"123@"];ALL_RULES["20d"]=p=>[p.toUpperCase()+"123"];ALL_RULES["20e"]=p=>[p+"@2026"];ALL_RULES["20f"]=(p,u)=>u?[u+"2026!"]:[];
-["ff","mlbb","lienquan","garena","pubg","tiktok","zalo","fb","roblox","genshin"].forEach((s,i)=>{ALL_RULES["21"+"abcdefghij"[i]]=p=>[p+s]});
-["qwerty","asdfgh","zxcvbn","123qwe","ytrewq","1qaz2wsx"].forEach((s,i)=>{ALL_RULES["22"+"abcdef"[i]]=p=>[p+s]});
-ALL_RULES["23a"]=p=>[p.replace(/[aeiouAEIOU]/g,"")];ALL_RULES["23b"]=p=>[p.replace(/[bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ]/g,"")];
-ALL_RULES["23c"]=p=>[p.replace(/[^A-Za-z]/g,"")];ALL_RULES["23d"]=p=>[p.replace(/[^0-9]/g,"")];ALL_RULES["23e"]=p=>[p.replace(/[0-9]/g,"")];ALL_RULES["23f"]=p=>p?[p[0]+p[0]+p.slice(1)]:[];
-["123","@","_","2026","!","vip"].forEach((s,i)=>{ALL_RULES["24"+"abcdef"[i]]=p=>_mid(p,s)});
-const YEAR=new Date().getFullYear();
-ALL_RULES["25a"]=p=>[p+YEAR+"!"];ALL_RULES["25b"]=p=>[p.toLowerCase()+"123@"];ALL_RULES["25c"]=p=>[p.toUpperCase()+YEAR];ALL_RULES["25d"]=p=>[(p[0]||"").toUpperCase()+p.slice(1).toLowerCase()+"vip123"];ALL_RULES["25e"]=p=>[p+"_"+YEAR];
-ALL_RULES["25f"]=p=>{if(p.length>=3){const mid=p[Math.floor(p.length/2)],half=p.slice(0,Math.floor(p.length/2));return[half+mid+half.split("").reverse().join("")]}return[]};
+// ========== DATA ==========
+const RULE_GROUPS = {
+  case: ['1a','1b','1c','1d','1e','1f'],
+  numbers: ['2a','2b','2c','2d','2e','2f','2g','2h','2i','2j','2k','2l','2m','2n'],
+  years: ['3a','3b','3c','3d','3e','3f','3g','3h','3i','3j','3k','3l','3m','3n'],
+  special: ['4a','4b','4c','4d','4e','4f','4g','4h','4i','4j','4k','4l','4m','4n'],
+  vn_suffix: ['5a','5b','5c','5d','5e','5f','5g','5h','5i','5j','5k','5l','5m','5n','5o'],
+  leet: ['6a','6b','6c','6d','6e','6f','6g','6h','6i','6j'],
+  separator: ['7a','7b','7c','7d','7e','7f','7g','7h'],
+  reverse: ['8a','8b','8c','8d','8e','8f','8g'],
+  double: ['9a','9b','9c','9d','9e','9f','9g'],
+  username: ['10a','10b','10c','10d','10e','10f','10g','10h','10i','10j'],
+  join: ['11a','11b','11c','11d','11e','11f'],
+  phone: ['12a','12b','12c','12d','12e','12f'],
+  common: ['13a','13b','13c','13d','13e','13f','13g','13h','13i'],
+  language: ['14a','14b','14c','14d','14e','14f','14g'],
+  num2letter: ['15a','15b','15c','15d','15e','15f'],
+  prefix: ['16a','16b','16c','16d','16e','16f'],
+  insert_mid: ['17a','17b','17c','17d','17e','17f'],
+  dates: ['18a','18b','18c','18d','18e','18f'],
+  basic_num: ['19a','19b','19c','19d','19e'],
+  advanced: ['20a','20b','20c','20d','20e','20f'],
+  game_vn: ['21a','21b','21c','21d','21e','21f','21g','21h','21i','21j'],
+  keyboard: ['22a','22b','22c','22d','22e','22f'],
+  remove: ['23a','23b','23c','23d','23e','23f'],
+  insert_str: ['24a','24b','24c','24d','24e','24f'],
+  extra: ['25a','25b','25c','25d','25e','25f']
+};
 
-function parseUserPass(line){line=line.trim();if(!line)return null;for(const sep of[":","|",";","\t",","]){if(line.includes(sep)){const parts=line.split(sep);if(parts.length>=2){const u=parts[0].trim(),pwd=parts.slice(1).join(sep).trim();if(u&&pwd)return[u,pwd]}}}return null}
-function hasEntropyIssue(s){if(/^(.)\1{4,}$/.test(s))return true;for(let ln=1;ln<Math.min(5,Math.floor(s.length/2)+1);ln++){const pat=s.slice(0,ln);if(s.length>=ln*3){const exp=pat.repeat(Math.ceil(s.length/ln)+1).slice(0,s.length);if(s===exp)return true}}return false}
-function isValid(v,orig,maxLen){if(!v||v===orig)return false;if(v.length<3||v.length>maxLen)return false;if(hasEntropyIssue(v))return false;return true}
-function applyBasicRules(pwd,user,ruleIds,maxLen,maxPer){const variants=new Set();for(const rid of ruleIds){const fn=ALL_RULES[rid];if(!fn)continue;try{const res=fn(pwd,user)||[];for(const r of res)if(isValid(r,pwd,maxLen))variants.add(r)}catch(e){}if(variants.size>=maxPer)break}return variants}
-function applyAdvancedChain(pwd,user,ruleIds,maxLen,maxPer,depth){let current=new Set([pwd]);const all=new Set();for(let d=0;d<depth;d++){const batch=new Set();for(const p of current){for(const rid of ruleIds){const fn=ALL_RULES[rid];if(!fn)continue;try{const res=fn(p,user)||[];for(const r of res)if(isValid(r,pwd,maxLen)&&r!==pwd){batch.add(r);all.add(r)}}catch(e){}if(all.size>=maxPer)break}if(all.size>=maxPer)break}current=batch;if(!current.size||all.size>=maxPer)break}return all}
-function applyCustom(pwd,user,suffixes,prefixes,seps,maxLen){const variants=new Set();for(const s of suffixes){const v=pwd+s;if(isValid(v,pwd,maxLen))variants.add(v)}for(const pr of prefixes){const v=pr+pwd;if(isValid(v,pwd,maxLen))variants.add(v)}for(const sep of seps){if(pwd.length>1){const mid=Math.floor(pwd.length/2);const v=pwd.slice(0,mid)+sep+pwd.slice(mid);if(isValid(v,pwd,maxLen))variants.add(v)}}return variants}
-function parseUserNumber(user){const m=user.match(/^(.*?)(\d+)$/);if(m)return[m[1],parseInt(m[2],10),m[2].length];return[user,0,0]}
-function buildClone(base,num,sep,pad){const ns=pad>0?String(num).padStart(pad,"0"):String(num);return sep?base+sep+ns:base+ns}
-function generateClones(lines,target,sep,pad,maxResults){const results=[],seen=new Set();for(const line of lines){const parsed=parseUserPass(line);if(!parsed)continue;const[user,pwd]=parsed;const[base,current,detectedPad]=parseUserNumber(user);const usePad=pad>0?pad:detectedPad;const start=current+1;if(start>target)continue;for(let n=start;n<=target;n++){const nu=buildClone(base,n,sep,usePad);const key=nu+":"+pwd;if(!seen.has(key)){seen.add(key);results.push(key);if(results.length>=maxResults)return results}}}return results}
+const GROUP_NAMES = {
+  case: 'Case & Capitalize', numbers: 'Numbers', years: 'Years', special: 'Special Chars',
+  vn_suffix: 'VN Suffixes', leet: 'Leet Speak', separator: 'Separators', reverse: 'Reverse & Transform',
+  double: 'Double & Repeat', username: 'From Username', join: 'Join & Transform', phone: 'Phone',
+  common: 'Common Words', language: 'Language', num2letter: 'Num to Letter', prefix: 'Security Prefix',
+  insert_mid: 'Insert Mid', dates: 'Dates', basic_num: 'Basic Numbers', advanced: 'Advanced Combos',
+  game_vn: 'Game VN', keyboard: 'Keyboard', remove: 'Remove Chars', insert_str: 'Insert Strings', extra: 'Extra Strong'
+};
 
-let currentMode="mutate";const selectedGroups=new Set(["numbers","years","special","vn_suffix"]);
-function setMode(mode){currentMode=mode;["mutate","clone","custom"].forEach(m=>{document.getElementById("panel-"+m).classList.toggle("hidden",m!==mode);const tab=document.getElementById("tab-"+m);if(m===mode){tab.classList.add("tab-active");tab.classList.remove("text-slate-400")}else{tab.classList.remove("tab-active");tab.classList.add("text-slate-400")}})}
-function selectAllGroups(on){selectedGroups.clear();if(on)Object.keys(RULE_GROUPS).forEach(g=>selectedGroups.add(g));renderGroups()}
-function renderGroups(){const c=document.getElementById("groups-container");c.innerHTML="";for(const[gid,name] of Object.entries(GROUP_NAMES)){const div=document.createElement("div");div.className="group-card cursor-pointer border rounded-lg px-3 py-2 text-xs "+(selectedGroups.has(gid)?"selected border-indigo-500":"border-dark-600");div.innerHTML='<div class="font-medium">'+name+'</div><div class="text-slate-500 text-[10px]">'+RULE_GROUPS[gid].length+' rules</div>';div.onclick=()=>{selectedGroups.has(gid)?selectedGroups.delete(gid):selectedGroups.add(gid);renderGroups()};c.appendChild(div)}}
-function loadFile(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>document.getElementById("input-area").value=ev.target.result;r.readAsText(f)}
-function copyOutput(){const ta=document.getElementById("output-area");ta.select();navigator.clipboard.writeText(ta.value).then(()=>alert("Đã copy!"))}
-function downloadOutput(){const text=document.getElementById("output-area").value;if(!text.trim())return alert("Chưa có dữ liệu!");const blob=new Blob([text],{type:"text/plain"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="variants_"+Date.now()+".txt";a.click();URL.revokeObjectURL(a.href)}
-function runTool(){const input=document.getElementById("input-area").value;const lines=input.split("\\n").filter(l=>l.trim());if(!lines.length)return alert("Vui lòng nhập combo!");const btn=document.getElementById("btn-generate");btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Đang xử lý...';setTimeout(()=>{const t0=performance.now();let out=[];if(currentMode==="clone"){const target=parseInt(document.getElementById("clone-target").value)||999;const sep=document.getElementById("clone-sep").value||"";const pad=parseInt(document.getElementById("clone-pad").value)||0;const maxR=parseInt(document.getElementById("clone-max").value)||50000;out=generateClones(lines,target,sep,pad,maxR)}else if(currentMode==="custom"){const maxLen=parseInt(document.getElementById("max-len").value)||24;const maxTotal=parseInt(document.getElementById("max-total").value)||20000;const suffixes=document.getElementById("custom-suffixes").value.split("\\n").map(s=>s.trim()).filter(Boolean);const prefixes=document.getElementById("custom-prefixes").value.split("\\n").map(s=>s.trim()).filter(Boolean);const seps=document.getElementById("custom-seps").value.split("\\n").map(s=>s.trim()).filter(Boolean);for(const line of lines){const parsed=parseUserPass(line);if(!parsed)continue;const[user,pwd]=parsed;const variants=applyCustom(pwd,user,suffixes,prefixes,seps,maxLen);for(const v of variants){out.push(user+":"+v);if(out.length>=maxTotal)break}if(out.length>=maxTotal)break}}else{const maxLen=parseInt(document.getElementById("max-len").value)||24;const maxPer=parseInt(document.getElementById("max-per-line").value)||60;const maxTotal=parseInt(document.getElementById("max-total").value)||20000;const depth=parseInt(document.getElementById("depth").value)||1;const advanced=document.getElementById("use-advanced").checked;let ruleIds=[];for(const g of selectedGroups)if(RULE_GROUPS[g])ruleIds=ruleIds.concat(RULE_GROUPS[g]);if(!ruleIds.length)ruleIds=RULE_GROUPS.numbers.slice(0,7).concat(RULE_GROUPS.years.slice(0,7)).concat(RULE_GROUPS.special.slice(0,7));for(const line of lines){const parsed=parseUserPass(line);if(!parsed)continue;const[user,pwd]=parsed;let variants=advanced&&depth>1?applyAdvancedChain(pwd,user,ruleIds,maxLen,maxPer,depth):applyBasicRules(pwd,user,ruleIds,maxLen,maxPer);for(const v of variants){out.push(user+":"+v);if(out.length>=maxTotal)break}if(out.length>=maxTotal)break}}const elapsed=((performance.now()-t0)/1000).toFixed(2);document.getElementById("output-area").value=out.join("\\n");document.getElementById("stat-input").textContent=lines.length;document.getElementById("stat-output").textContent=out.length.toLocaleString();document.getElementById("stat-time").textContent=elapsed+"s";document.getElementById("stats").classList.remove("hidden");btn.disabled=false;btn.innerHTML='<i class="fas fa-bolt"></i> Generate Variants'},30)}
+const ALL_RULES = {};
+
+// ===== Rule functions (correct syntax) =====
+ALL_RULES['1a'] = (p) => [p.toLowerCase()];
+ALL_RULES['1b'] = (p) => [p.toUpperCase()];
+ALL_RULES['1c'] = (p) => { for (let i = 0; i < p.length; i++) if (/[a-zA-Z]/.test(p[i])) return [p.slice(0,i) + p[i].toUpperCase() + p.slice(i+1).toLowerCase()]; return []; };
+ALL_RULES['1d'] = (p) => { for (let i = p.length-1; i >= 0; i--) if (/[a-zA-Z]/.test(p[i])) return [p.slice(0,i) + p[i].toUpperCase() + p.slice(i+1)]; return []; };
+ALL_RULES['1e'] = (p) => [[...p].map((c,i) => i % 2 === 0 ? c.toUpperCase() : c.toLowerCase()).join('')];
+ALL_RULES['1f'] = (p) => [p.replace(/\w\S*/g, t => t.charAt(0).toUpperCase() + t.slice(1).toLowerCase())];
+
+['123','1234','12345','123456','1234567','12345678','123456789','111','999','666','000','777','88','69'].forEach((s, i) => {
+  ALL_RULES['2' + 'abcdefghijklmn'[i]] = (p) => [p + s];
+});
+['1990','2000','2010','2020','2024','2025','2026','90','95','99','2023','2015','2005'].forEach((s, i) => {
+  ALL_RULES['3' + 'abcdefghijklm'[i]] = (p) => [p + s];
+});
+ALL_RULES['3n'] = (p) => ['1985','1988','1992','1995','1998','2001','2003','2008','2012','2018'].map(y => p + y);
+
+['@','@@','!','!!','#','$','.','*','&','^','~','%','?','!!@'].forEach((s, i) => {
+  ALL_RULES['4' + 'abcdefghijklmn'[i]] = (p) => [p + s];
+});
+['vip','pro','cute','love','baby','hihi','kaka','ok','123ok','abc','xyz','qwerty','depzai','xinh','yeu'].forEach((s, i) => {
+  ALL_RULES['5' + 'abcdefghijklmno'[i]] = (p) => [p + s];
+});
+
+ALL_RULES['6a'] = (p) => [p.replace(/[aA]/g, '@')];
+ALL_RULES['6b'] = (p) => [p.replace(/[oO]/g, '0')];
+ALL_RULES['6c'] = (p) => [p.replace(/[iI]/g, '1')];
+ALL_RULES['6d'] = (p) => [p.replace(/[eE]/g, '3')];
+ALL_RULES['6e'] = (p) => [p.replace(/[sS]/g, '$')];
+ALL_RULES['6f'] = (p) => [p.replace(/[tT]/g, '7')];
+ALL_RULES['6g'] = (p) => [p.replace(/[gG]/g, '9')];
+ALL_RULES['6h'] = (p) => [p.replace(/[bB]/g, '8')];
+ALL_RULES['6j'] = (p) => [p.replace(/[lL]/g, '1')];
+ALL_RULES['6i'] = (p) => {
+  let r = p;
+  [['aA','@'],['oO','0'],['eE','3'],['iI','1'],['sS','$'],['tT','7'],['gG','9'],['bB','8'],['lL','1']].forEach(([chars, rep]) => {
+    r = r.replace(new RegExp('[' + chars + ']', 'g'), rep);
+  });
+  return r !== p ? [r] : [];
+};
+
+function _sep(p, s) {
+  let m = p.match(/^([A-Za-z]+)(\d+)$/) || p.match(/^(\d+)([A-Za-z]+)$/);
+  if (m) {
+    let letters = /[A-Za-z]/.test(m[1]) ? m[1] : m[2];
+    let digits  = /\d/.test(m[1]) ? m[1] : m[2];
+    return [letters + s + digits];
+  }
+  return [];
+}
+['_','-','.','#','@','|',':','~'].forEach((s, i) => {
+  ALL_RULES['7' + 'abcdefgh'[i]] = (p) => _sep(p, s);
+});
+
+ALL_RULES['8a'] = (p) => [p.split('').reverse().join('')];
+ALL_RULES['8b'] = (p) => {
+  const letters = (p.match(/[A-Za-z]/g) || []);
+  const non = (p.match(/[^A-Za-z]/g) || []);
+  return letters.length ? [letters.reverse().join('') + non.join('')] : [];
+};
+ALL_RULES['8c'] = (p) => {
+  const nums = p.match(/\d+/);
+  return nums ? [p.replace(nums[0], nums[0].split('').reverse().join(''))] : [];
+};
+ALL_RULES['8d'] = (p) => [[...p].map(c => c === c.toUpperCase() ? c.toLowerCase() : c.toUpperCase()).join('')];
+ALL_RULES['8e'] = (p) => p.length > 1 ? [p.slice(-1) + p.slice(0, -1)] : [];
+ALL_RULES['8f'] = (p) => p.length > 1 ? [p.slice(1) + p[0]] : [];
+ALL_RULES['8g'] = (p) => {
+  const rev = p.split('').reverse().join('');
+  return rev ? [rev[0].toUpperCase() + rev.slice(1).toLowerCase()] : [];
+};
+
+ALL_RULES['9a'] = (p) => p.length * 2 <= 64 ? [p + p] : [];
+ALL_RULES['9b'] = (p) => p.length * 3 <= 64 ? [p + p + p] : [];
+ALL_RULES['9c'] = (p) => {
+  const l = (p.match(/[A-Za-z]/g) || []);
+  return l.length && p.length + 3 <= 64 ? [p + l[0].repeat(3)] : [];
+};
+ALL_RULES['9d'] = (p) => p && p.length + 1 <= 64 ? [p + p.slice(-1)] : [];
+ALL_RULES['9e'] = (p) => p && p.length + 1 <= 64 ? [p[0] + p] : [];
+ALL_RULES['9f'] = (p) => p.length >= 3 && p.length + 3 <= 64 ? [p + p.slice(0, 3)] : [];
+ALL_RULES['9g'] = (p) => p.length >= 2 && p.length + 2 <= 64 ? [p + p.slice(-2)] : [];
+
+ALL_RULES['10a'] = (p, u) => u ? [u + '123'] : [];
+ALL_RULES['10b'] = (p, u) => u ? [u + '@'] : [];
+ALL_RULES['10c'] = (p, u) => u ? [u + '1999'] : [];
+ALL_RULES['10d'] = (p, u) => u ? [u + '@123'] : [];
+ALL_RULES['10e'] = (p, u) => (u && p) ? [u + p] : [];
+ALL_RULES['10f'] = (p, u) => u ? [u[0].toUpperCase() + u.slice(1)] : [];
+ALL_RULES['10g'] = (p, u) => (u && p) ? [u + p + '123'] : [];
+ALL_RULES['10h'] = (p, u) => (u && p) ? [p + u] : [];
+ALL_RULES['10i'] = (p, u) => (u && p) ? [u + '_' + p] : [];
+ALL_RULES['10j'] = (p, u) => (u && p) ? [u + '.' + p] : [];
+
+ALL_RULES['11a'] = (p) => { const m = p.match(/(\d+)$/); return m ? [p + m[1][0]] : []; };
+ALL_RULES['11b'] = (p) => { const m = p.match(/^(\d+)/); return m ? [m[1][0] + p] : []; };
+ALL_RULES['11c'] = (p) => p ? [p[0].toUpperCase() + p.slice(1).toLowerCase()] : [];
+ALL_RULES['11d'] = (p) => [p.toLowerCase().replace(/[^a-z0-9]+/g, '_')];
+ALL_RULES['11e'] = (p) => [p.toLowerCase().replace(/[^a-z0-9]+/g, '-')];
+ALL_RULES['11f'] = (p) => [p.replace(/[^A-Za-z0-9]/g, '')];
+
+function _isPhone(s) { return /^0\d{9,10}$/.test(s) || /^84\d{9,10}$/.test(s); }
+ALL_RULES['12a'] = (p) => _isPhone(p) ? [p + '@'] : [];
+ALL_RULES['12b'] = (p) => _isPhone(p) ? [p + '123'] : [];
+ALL_RULES['12c'] = (p) => _isPhone(p) ? [p + 'vip'] : [];
+ALL_RULES['12d'] = (p) => (_isPhone(p) && p.startsWith('0')) ? [p.slice(1)] : [];
+ALL_RULES['12e'] = (p) => (_isPhone(p) && p.startsWith('0')) ? ['+84' + p.slice(1)] : [];
+ALL_RULES['12f'] = (p) => _isPhone(p) ? [p + 'ok'] : [];
+
+['pass','pwd','admin','root','test','user','login','123pass','matkhau'].forEach((s, i) => {
+  ALL_RULES['13' + 'abcdefghi'[i]] = (p) => [p + s];
+});
+
+ALL_RULES['14a'] = (p) => [p + 'vn'];
+ALL_RULES['14b'] = (p) => [p + '123vn'];
+ALL_RULES['14c'] = (p) => [p + 'sg'];
+ALL_RULES['14d'] = (p) => ['vn_' + p];
+ALL_RULES['14e'] = (p) => [p + 'asia'];
+ALL_RULES['14f'] = (p) => [p + 'vn2026'];
+ALL_RULES['14g'] = (p) => ['sg_' + p];
+
+ALL_RULES['15a'] = (p) => [p.replace(/0/g, 'o')];
+ALL_RULES['15b'] = (p) => [p.replace(/1/g, 'i')];
+ALL_RULES['15c'] = (p) => [p.replace(/5/g, 's')];
+ALL_RULES['15d'] = (p) => [p.replace(/0/g, 'o').replace(/1/g, 'i').replace(/5/g, 's').replace(/8/g, 'B')];
+ALL_RULES['15e'] = (p) => [p.replace(/8/g, 'B')];
+ALL_RULES['15f'] = (p) => [p.replace(/3/g, 'E')];
+
+['secure','secret','private','hidden','my','super'].forEach((s, i) => {
+  ALL_RULES['16' + 'abcdef'[i]] = (p) => [s + p];
+});
+
+function _mid(p, s) {
+  if (p.length > 1) {
+    const mid = Math.floor(p.length / 2);
+    return [p.slice(0, mid) + s + p.slice(mid)];
+  }
+  return [];
+}
+['@','#','!','$','_','.'].forEach((s, i) => {
+  ALL_RULES['17' + 'abcdef'[i]] = (p) => _mid(p, s);
+});
+
+ALL_RULES['18a'] = (p) => [p + '010101'];
+ALL_RULES['18b'] = (p) => [p + '120101'];
+ALL_RULES['18c'] = (p) => [p + '150101'];
+ALL_RULES['18d'] = (p) => [p + '311201'];
+ALL_RULES['18e'] = (p) => [p + '01012000'];
+ALL_RULES['18f'] = (p) => ['01012000','15052000','20092000','31122000','01011995','01012005'].map(d => p + d);
+
+ALL_RULES['19a'] = (p) => [p + '12345'];
+ALL_RULES['19b'] = (p) => ['1' + p];
+ALL_RULES['19c'] = (p) => [p + '99'];
+ALL_RULES['19d'] = (p) => [p + '99999'];
+ALL_RULES['19e'] = (p) => [p + '123321'];
+
+ALL_RULES['20a'] = (p, u) => (u && p) ? [u + p + '2026'] : [];
+ALL_RULES['20b'] = (p) => [p + '123vip'];
+ALL_RULES['20c'] = (p) => [p.toLowerCase() + '123@'];
+ALL_RULES['20d'] = (p) => [p.toUpperCase() + '123'];
+ALL_RULES['20e'] = (p) => [p + '@2026'];
+ALL_RULES['20f'] = (p, u) => u ? [u + '2026!'] : [];
+
+['ff','mlbb','lienquan','garena','pubg','tiktok','zalo','fb','roblox','genshin'].forEach((s, i) => {
+  ALL_RULES['21' + 'abcdefghij'[i]] = (p) => [p + s];
+});
+['qwerty','asdfgh','zxcvbn','123qwe','ytrewq','1qaz2wsx'].forEach((s, i) => {
+  ALL_RULES['22' + 'abcdef'[i]] = (p) => [p + s];
+});
+
+ALL_RULES['23a'] = (p) => [p.replace(/[aeiouAEIOU]/g, '')];
+ALL_RULES['23b'] = (p) => [p.replace(/[bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ]/g, '')];
+ALL_RULES['23c'] = (p) => [p.replace(/[^A-Za-z]/g, '')];
+ALL_RULES['23d'] = (p) => [p.replace(/[^0-9]/g, '')];
+ALL_RULES['23e'] = (p) => [p.replace(/[0-9]/g, '')];
+ALL_RULES['23f'] = (p) => p ? [p[0] + p[0] + p.slice(1)] : [];
+
+['123','@','_','2026','!','vip'].forEach((s, i) => {
+  ALL_RULES['24' + 'abcdef'[i]] = (p) => _mid(p, s);
+});
+
+const YEAR = new Date().getFullYear();
+ALL_RULES['25a'] = (p) => [p + YEAR + '!'];
+ALL_RULES['25b'] = (p) => [p.toLowerCase() + '123@'];
+ALL_RULES['25c'] = (p) => [p.toUpperCase() + YEAR];
+ALL_RULES['25d'] = (p) => [(p[0] || '').toUpperCase() + p.slice(1).toLowerCase() + 'vip123'];
+ALL_RULES['25e'] = (p) => [p + '_' + YEAR];
+ALL_RULES['25f'] = (p) => {
+  if (p.length >= 3) {
+    const mid = p[Math.floor(p.length / 2)];
+    const half = p.slice(0, Math.floor(p.length / 2));
+    return [half + mid + half.split('').reverse().join('')];
+  }
+  return [];
+};
+
+// ========== CORE LOGIC ==========
+function parseUserPass(line) {
+  line = line.trim();
+  if (!line) return null;
+  for (const sep of [':', '|', ';', '\t', ',']) {
+    if (line.includes(sep)) {
+      const parts = line.split(sep);
+      if (parts.length >= 2) {
+        const u = parts[0].trim();
+        const pwd = parts.slice(1).join(sep).trim();
+        if (u && pwd) return [u, pwd];
+      }
+    }
+  }
+  return null;
+}
+
+function hasEntropyIssue(s) {
+  if (/^(.)\1{4,}$/.test(s)) return true;
+  for (let ln = 1; ln < Math.min(5, Math.floor(s.length / 2) + 1); ln++) {
+    const pat = s.slice(0, ln);
+    if (s.length >= ln * 3) {
+      const expected = pat.repeat(Math.ceil(s.length / ln) + 1).slice(0, s.length);
+      if (s === expected) return true;
+    }
+  }
+  return false;
+}
+
+function isValid(v, original, maxLen) {
+  if (!v || v === original) return false;
+  if (v.length < 3 || v.length > maxLen) return false;
+  if (hasEntropyIssue(v)) return false;
+  return true;
+}
+
+function applyBasicRules(password, username, ruleIds, maxLen, maxPerLine) {
+  const variants = new Set();
+  for (const rid of ruleIds) {
+    const fn = ALL_RULES[rid];
+    if (!fn) continue;
+    try {
+      const results = fn(password, username) || [];
+      for (const r of results) {
+        if (isValid(r, password, maxLen)) variants.add(r);
+      }
+    } catch (e) {}
+    if (variants.size >= maxPerLine) break;
+  }
+  return variants;
+}
+
+function applyAdvancedChain(password, username, ruleIds, maxLen, maxPerLine, depth) {
+  let current = new Set([password]);
+  const allResults = new Set();
+  for (let d = 0; d < depth; d++) {
+    const newBatch = new Set();
+    for (const pwd of current) {
+      for (const rid of ruleIds) {
+        const fn = ALL_RULES[rid];
+        if (!fn) continue;
+        try {
+          const results = fn(pwd, username) || [];
+          for (const r of results) {
+            if (isValid(r, password, maxLen) && r !== password) {
+              newBatch.add(r);
+              allResults.add(r);
+            }
+          }
+        } catch (e) {}
+        if (allResults.size >= maxPerLine) break;
+      }
+      if (allResults.size >= maxPerLine) break;
+    }
+    current = newBatch;
+    if (!current.size || allResults.size >= maxPerLine) break;
+  }
+  return allResults;
+}
+
+function applyCustom(password, username, suffixes, prefixes, separators, maxLen) {
+  const variants = new Set();
+  for (const s of suffixes) {
+    const v = password + s;
+    if (isValid(v, password, maxLen)) variants.add(v);
+  }
+  for (const pr of prefixes) {
+    const v = pr + password;
+    if (isValid(v, password, maxLen)) variants.add(v);
+  }
+  for (const sep of separators) {
+    if (password.length > 1) {
+      const mid = Math.floor(password.length / 2);
+      const v = password.slice(0, mid) + sep + password.slice(mid);
+      if (isValid(v, password, maxLen)) variants.add(v);
+    }
+  }
+  return variants;
+}
+
+function parseUserNumber(user) {
+  const m = user.match(/^(.*?)(\d+)$/);
+  if (m) return [m[1], parseInt(m[2], 10), m[2].length];
+  return [user, 0, 0];
+}
+
+function buildClone(base, num, sep, pad) {
+  const ns = pad > 0 ? String(num).padStart(pad, '0') : String(num);
+  return sep ? (base + sep + ns) : (base + ns);
+}
+
+function generateClones(lines, target, sep, pad, maxResults) {
+  const results = [];
+  const seen = new Set();
+  for (const line of lines) {
+    const parsed = parseUserPass(line);
+    if (!parsed) continue;
+    const [user, pwd] = parsed;
+    const [base, current, detectedPad] = parseUserNumber(user);
+    const usePad = pad > 0 ? pad : detectedPad;
+    const start = current + 1;
+    if (start > target) continue;
+    for (let n = start; n <= target; n++) {
+      const nu = buildClone(base, n, sep, usePad);
+      const key = nu + ':' + pwd;
+      if (!seen.has(key)) {
+        seen.add(key);
+        results.push(key);
+        if (results.length >= maxResults) return results;
+      }
+    }
+  }
+  return results;
+}
+
+// ========== UI ==========
+let currentMode = 'mutate';
+const selectedGroups = new Set(['numbers', 'years', 'special', 'vn_suffix']);
+
+function setMode(mode) {
+  currentMode = mode;
+  ['mutate', 'clone', 'custom'].forEach(m => {
+    document.getElementById('panel-' + m).classList.toggle('hidden', m !== mode);
+    const tab = document.getElementById('tab-' + m);
+    if (m === mode) {
+      tab.classList.add('tab-active');
+      tab.classList.remove('text-slate-400');
+    } else {
+      tab.classList.remove('tab-active');
+      tab.classList.add('text-slate-400');
+    }
+  });
+}
+
+function selectAllGroups(on) {
+  selectedGroups.clear();
+  if (on) Object.keys(RULE_GROUPS).forEach(g => selectedGroups.add(g));
+  renderGroups();
+}
+
+function renderGroups() {
+  const container = document.getElementById('groups-container');
+  container.innerHTML = '';
+  for (const [gid, name] of Object.entries(GROUP_NAMES)) {
+    const div = document.createElement('div');
+    const selected = selectedGroups.has(gid);
+    div.className = 'group-card border rounded-lg px-3 py-2 text-xs ' + (selected ? 'selected border-indigo-500' : 'border-dark-600');
+    div.innerHTML = '<div class="font-medium">' + name + '</div><div class="text-slate-500 text-[10px]">' + RULE_GROUPS[gid].length + ' rules</div>';
+    div.onclick = function() {
+      if (selectedGroups.has(gid)) selectedGroups.delete(gid);
+      else selectedGroups.add(gid);
+      renderGroups();
+    };
+    container.appendChild(div);
+  }
+}
+
+function loadFile(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(ev) {
+    document.getElementById('input-area').value = ev.target.result;
+  };
+  reader.readAsText(file);
+}
+
+function copyOutput() {
+  const ta = document.getElementById('output-area');
+  ta.select();
+  navigator.clipboard.writeText(ta.value).then(function() {
+    alert('Đã copy vào clipboard!');
+  });
+}
+
+function downloadOutput() {
+  const text = document.getElementById('output-area').value;
+  if (!text.trim()) {
+    alert('Chưa có dữ liệu để tải!');
+    return;
+  }
+  const blob = new Blob([text], { type: 'text/plain' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'variants_' + Date.now() + '.txt';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function runTool() {
+  const input = document.getElementById('input-area').value;
+  const lines = input.split('\n').filter(function(l) { return l.trim(); });
+  if (!lines.length) {
+    alert('Vui lòng nhập combo!');
+    return;
+  }
+
+  const btn = document.getElementById('btn-generate');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang xử lý...';
+
+  setTimeout(function() {
+    const t0 = performance.now();
+    let out = [];
+
+    if (currentMode === 'clone') {
+      const target = parseInt(document.getElementById('clone-target').value) || 999;
+      const sep = document.getElementById('clone-sep').value || '';
+      const pad = parseInt(document.getElementById('clone-pad').value) || 0;
+      const maxR = parseInt(document.getElementById('clone-max').value) || 50000;
+      out = generateClones(lines, target, sep, pad, maxR);
+    } else if (currentMode === 'custom') {
+      const maxLen = parseInt(document.getElementById('max-len').value) || 24;
+      const maxTotal = parseInt(document.getElementById('max-total').value) || 20000;
+      const suffixes = document.getElementById('custom-suffixes').value.split('\n').map(function(s) { return s.trim(); }).filter(Boolean);
+      const prefixes = document.getElementById('custom-prefixes').value.split('\n').map(function(s) { return s.trim(); }).filter(Boolean);
+      const seps = document.getElementById('custom-seps').value.split('\n').map(function(s) { return s.trim(); }).filter(Boolean);
+
+      for (const line of lines) {
+        const parsed = parseUserPass(line);
+        if (!parsed) continue;
+        const user = parsed[0], pwd = parsed[1];
+        const variants = applyCustom(pwd, user, suffixes, prefixes, seps, maxLen);
+        for (const v of variants) {
+          out.push(user + ':' + v);
+          if (out.length >= maxTotal) break;
+        }
+        if (out.length >= maxTotal) break;
+      }
+    } else {
+      // mutate
+      const maxLen = parseInt(document.getElementById('max-len').value) || 24;
+      const maxPer = parseInt(document.getElementById('max-per-line').value) || 60;
+      const maxTotal = parseInt(document.getElementById('max-total').value) || 20000;
+      const depth = parseInt(document.getElementById('depth').value) || 1;
+      const advanced = document.getElementById('use-advanced').checked;
+
+      let ruleIds = [];
+      for (const g of selectedGroups) {
+        if (RULE_GROUPS[g]) ruleIds = ruleIds.concat(RULE_GROUPS[g]);
+      }
+      if (!ruleIds.length) {
+        ruleIds = RULE_GROUPS.numbers.slice(0, 7)
+          .concat(RULE_GROUPS.years.slice(0, 7))
+          .concat(RULE_GROUPS.special.slice(0, 7));
+      }
+
+      for (const line of lines) {
+        const parsed = parseUserPass(line);
+        if (!parsed) continue;
+        const user = parsed[0], pwd = parsed[1];
+        let variants;
+        if (advanced && depth > 1) {
+          variants = applyAdvancedChain(pwd, user, ruleIds, maxLen, maxPer, depth);
+        } else {
+          variants = applyBasicRules(pwd, user, ruleIds, maxLen, maxPer);
+        }
+        for (const v of variants) {
+          out.push(user + ':' + v);
+          if (out.length >= maxTotal) break;
+        }
+        if (out.length >= maxTotal) break;
+      }
+    }
+
+    const elapsed = ((performance.now() - t0) / 1000).toFixed(2);
+    document.getElementById('output-area').value = out.join('\n');
+    document.getElementById('stat-input').textContent = lines.length;
+    document.getElementById('stat-output').textContent = out.length.toLocaleString();
+    document.getElementById('stat-time').textContent = elapsed + 's';
+    document.getElementById('stats').classList.remove('hidden');
+
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-bolt"></i> Generate Variants';
+  }, 30);
+}
+
+// Init
 renderGroups();
 </script>
 </body>
